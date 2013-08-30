@@ -1,8 +1,12 @@
+var word = "BUTT";
+
 $(document).ready(function() {
     generateButtons();
     
     $('#letters button').click(function() {
-        console.log($(this).attr('value'));
+        var guess = $(this).attr('value');
+        
+        guessLetter(guess);
     });
 });
 
@@ -14,4 +18,12 @@ function generateButtons() {
     }
     
     $('#letters').html(snippet);
-}
+};
+
+function guessLetter(guess) {
+    if (word.indexOf(guess) !== -1) {
+        console.log(true);
+    } else {
+        
+    }
+};
