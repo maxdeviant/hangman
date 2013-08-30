@@ -1,3 +1,16 @@
+#start {
+    display: default;
+    margin-left: 45%;
+}
+
+#letterbank {
+    display: none;
+}
+
+#word {
+    display: none;
+}
+
 div.word {
     display: inline;
 }

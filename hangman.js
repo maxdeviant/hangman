@@ -1,11 +1,21 @@
 var word;
+var completed = 0;
 
 $(document).ready(function() {
     init();
     
+    $('#start').click(function() {
+        // Hide the start button
+        $('#start').css('display', 'none');
+        
+        // Show the other elements
+        $('#word').css('display', 'inline');
+        $('#letterbank').css('display', 'inline');
+    });
+    
     $('#letterbank button').click(function() {
         var guess = $(this).attr('value');
-        
+
         guessLetter(guess);
     });
 });
@@ -48,13 +58,13 @@ function generateBlanks() {
 
 // Guess a letter
 function guessLetter(guess) {
-    // Get the position of the guess letter in the word, or -1 if not found
+    // Get the position of the guess letter in the word
     var position = getPosition(guess);
-    console.log(position);
     
     if (position.length === 1) {
         // Reveal the guessed letter
         $('div > #' + position).html(guess);
+        completed += 1;
         
         // Disable button
         $('button[value=' + guess + ']').prop('disabled', 'disabled');
@@ -62,6 +72,7 @@ function guessLetter(guess) {
         for (var i = 0; i< position.length; i++) {
             // Reveal the guessed letter
             $('div > #' + position[i]).html(guess);
+            completed += 1;
         }
         
         // Disable button
@@ -76,8 +87,11 @@ function guessLetter(guess) {
             $('#guessed').append(guess);
         }
     }
+    
+    checkWon();
 };
 
+// Find all occurrences of a given letter in the word
 function getPosition(letter) {
     var indices = [];
     
@@ -88,4 +102,11 @@ function getPosition(letter) {
     }
     
     return indices;
+};
+
+// Check if the player has won
+function checkWon() {
+    if (completed === word.length) {
+        console.log("Winner!");
+    }
 };
