@@ -30,7 +30,7 @@ function generateButtons() {
 };
 
 function generateWord() {
-    var list = ["HOUSE", "COMPUTER", "MOUSE", "RHETORIC"];
+    var list = ["HOUSE", "COMPUTER", "MOUSE", "RHETORIC", "HERRING"];
 
     return list[Math.floor(Math.random() * list.length)];
 };
@@ -48,16 +48,44 @@ function generateBlanks() {
 
 // Guess a letter
 function guessLetter(guess) {
-    var position = word.indexOf(guess);
+    // Get the position of the guess letter in the word, or -1 if not found
+    var position = getPosition(guess);
+    console.log(position);
     
-    if (position !== -1) {
+    if (position.length === 1) {
+        // Reveal the guessed letter
         $('div > #' + position).html(guess);
+        
+        // Disable button
         $('button[value=' + guess + ']').prop('disabled', 'disabled');
-        console.log(position);
+    } else if (position.length > 1) {
+        for (var i = 0; i< position.length; i++) {
+            // Reveal the guessed letter
+            $('div > #' + position[i]).html(guess);
+        }
+        
+        // Disable button
+        $('button[value=' + guess + ']').prop('disabled', 'disabled');
     } else {
-        if ($('#guesses').html().indexOf(guess) === -1) {
+        // If the letter has not already been guessed
+        if ($('#guessed').html().indexOf(guess) === -1) {
+            // Disable button
             $('button[value=' + guess + ']').prop('disabled', 'disabled');
-            $('#guesses').append(guess);
+            
+            // Add letter to guessed list
+            $('#guessed').append(guess);
         }
     }
+};
+
+function getPosition(letter) {
+    var indices = [];
+    
+    for (var i = 0; i < word.length; i++) {
+        if (letter === word.charAt(i)) {
+            indices.push(i);
+        }
+    }
+    
+    return indices;
 };
