@@ -1,9 +1,9 @@
-var word = "BUTT";
+var word = "COMPUTER";
 
 $(document).ready(function() {
     generateButtons();
     
-    $('#letters button').click(function() {
+    $('#letterbank button').click(function() {
         var guess = $(this).attr('value');
         
         guessLetter(guess);
@@ -17,13 +17,15 @@ function generateButtons() {
         snippet += '<button type="button" class="btn btn-default" value="' + String.fromCharCode(65 + i) + '">' + String.fromCharCode(65 + i) + '</button>'
     }
     
-    $('#letters').html(snippet);
+    $('#letterbank').html(snippet);
 };
 
 function guessLetter(guess) {
     if (word.indexOf(guess) !== -1) {
-        console.log(true);
+        console.log("found");
     } else {
-        
+        if ($('#guesses').html().indexOf(guess) === -1) {
+            $('#guesses').append(guess);
+        }
     }
 };
