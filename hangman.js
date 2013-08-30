@@ -52,9 +52,11 @@ function guessLetter(guess) {
     
     if (position !== -1) {
         $('div > #' + position).html(guess);
+        $('button[value=' + guess + ']').prop('disabled', 'disabled');
         console.log(position);
     } else {
         if ($('#guesses').html().indexOf(guess) === -1) {
+            $('button[value=' + guess + ']').prop('disabled', 'disabled');
             $('#guesses').append(guess);
         }
     }
