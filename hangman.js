@@ -1,8 +1,7 @@
-var word = "COMPUTER";
+var word;
 
 $(document).ready(function() {
-    generateButtons();
-    generateWord();
+    init();
     
     $('#letterbank button').click(function() {
         var guess = $(this).attr('value');
@@ -11,6 +10,15 @@ $(document).ready(function() {
     });
 });
 
+function init() {
+    word = generateWord();
+    console.log(word);
+    
+    generateButtons();
+    generateBlanks();
+};
+
+// Generates buttons A-Z for use in guessing
 function generateButtons() {
     var snippet = "";
     
@@ -22,6 +30,13 @@ function generateButtons() {
 };
 
 function generateWord() {
+    var list = ["HOUSE", "COMPUTER", "MOUSE", "RHETORIC"];
+
+    return list[Math.floor(Math.random() * list.length)];
+};
+
+// Takes the given word and generates blanks for that word
+function generateBlanks() {
     var snippet = "";
     
     for (var i = 0; i < word.length; i++) {
@@ -31,6 +46,7 @@ function generateWord() {
     $('#word').html(snippet);
 };
 
+// Guess a letter
 function guessLetter(guess) {
     var position = word.indexOf(guess);
     
