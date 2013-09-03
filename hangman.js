@@ -1,3 +1,4 @@
+// Global variables (hate me later)
 var word;
 var completed = 0;
 var strikes = 0;
@@ -68,15 +69,12 @@ function generateButtons() {
     
     for (var i = 0; i < 26; i++) {
         snippet += '<button type="button" class="btn btn-default" value="' + String.fromCharCode(65 + i) + '">' + String.fromCharCode(65 + i) + '</button>'
-        
-        /*if ((i + 1) !== 26) {
-            snippet += '<p></p>'
-        }*/
     }
     
     $('#letterbank').html(snippet);
 };
 
+// Grab a new word for the user to guess
 function generateWord() {
     var list = ["HOUSE", "COMPUTER", "MOUSE", "RHETORIC", "HERRING"];
 
@@ -130,9 +128,9 @@ function guessLetter(guess) {
         }
     }
     
+    // Check if the user has managed to win or lose yet
     if (checkWon() || checkLost()) {
-        // New Game
-        //init();
+        // Start a new game
         reset();
     }
 };
@@ -156,12 +154,6 @@ function checkWon() {
         alert('You win!');
         
         return true;
-        /*$('#newGame').html('<button type="button" class="btn btn-lg btn-primary">New Game</button>').css('display', 'inline');
-        
-        // Hide the other elements
-        $('#word').css('display', 'none');
-        $('#guessed').css('display', 'none');
-        $('#letterbank').css('display', 'none');*/
     }
     
     return false;
