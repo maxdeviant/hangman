@@ -39,6 +39,18 @@ function init() {
     generateBlanks();
 };
 
+function reset() {
+    word = generateWord();
+    completed = 0;
+    console.log(word);
+    
+    generateBlanks();
+    
+    // Reset disabled state
+    $('#letterbank button').prop('disabled', '');
+    $('#guessed').html('');
+};
+
 // Generates buttons A-Z for use in guessing
 function generateButtons() {
     var snippet = "";
@@ -101,7 +113,8 @@ function guessLetter(guess) {
     
     if (checkWon()) {
         // New Game
-        init();
+        //init();
+        reset();
     }
 };
 
