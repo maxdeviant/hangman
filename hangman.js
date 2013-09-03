@@ -1,5 +1,6 @@
 var word;
 var completed = 0;
+var strikes = 0;
 
 $(document).ready(function() {
     init();
@@ -40,8 +41,10 @@ function init() {
 };
 
 function reset() {
-    word = generateWord();
     completed = 0;
+    strikes = 0;
+    
+    word = generateWord();
     console.log(word);
     
     generateBlanks();
@@ -50,6 +53,8 @@ function reset() {
     $('#letterbank button').prop('disabled', '');
     // Clear guessed box
     $('#guessed').html('');
+    // Clear strikes box
+    $('#strikes').html('');
 };
 
 // Generates buttons A-Z for use in guessing
@@ -112,10 +117,11 @@ function guessLetter(guess) {
             
             // Add one strike
             $('#strikes').append('X').css('color', 'red');
+            strikes += 1;
         }
     }
     
-    if (checkWon()) {
+    if (checkWon() || checkLost()) {
         // New Game
         //init();
         reset();
@@ -152,3 +158,15 @@ function checkWon() {
     
     return false;
 };
+
+// Check if the player has lost
+function checkLost() {
+    if (strikes >= 3) {
+        console.log('Loser!');
+        alert('You lost!');
+        
+        return true;
+    }
+    
+    return false;
+}
