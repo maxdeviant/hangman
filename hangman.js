@@ -48,6 +48,7 @@ function reset() {
     
     // Reset disabled state
     $('#letterbank button').prop('disabled', '');
+    // Clear guessed box
     $('#guessed').html('');
 };
 
@@ -108,6 +109,9 @@ function guessLetter(guess) {
             
             // Add letter to guessed list
             $('#guessed').append(guess);
+            
+            // Add one strike
+            $('#strikes').append('X').css('color', 'red');
         }
     }
     
