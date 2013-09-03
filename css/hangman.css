@@ -1,16 +1,23 @@
 #start {
     display: default;
-    margin-left: 45%;
+    margin-left: 44.5%;
 }
 
 #letterbank {
     display: none;
 }
 
+#letterbank > button {
+    margin: 5px;
+    padding: 10px 20px 10px 20px;
+}
+
 #word {
     display: none;
+    margin-left: 40%;
 }
 
 div.word {
     display: inline;
+    font-size: 25pt;
 }

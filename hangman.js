@@ -32,6 +32,7 @@ $(document).ready(function() {
     });
 });
 
+// Initialize Hangman
 function init() {
     word = generateWord();
     console.log(word);
@@ -40,13 +41,17 @@ function init() {
     generateBlanks();
 };
 
+// Reset the game
 function reset() {
+    // Reset completed and strike counters
     completed = 0;
     strikes = 0;
     
+    // Generate a new word
     word = generateWord();
     console.log(word);
     
+    // Generate blanks for the word
     generateBlanks();
     
     // Reset disabled state
@@ -63,6 +68,10 @@ function generateButtons() {
     
     for (var i = 0; i < 26; i++) {
         snippet += '<button type="button" class="btn btn-default" value="' + String.fromCharCode(65 + i) + '">' + String.fromCharCode(65 + i) + '</button>'
+        
+        /*if ((i + 1) !== 26) {
+            snippet += '<p></p>'
+        }*/
     }
     
     $('#letterbank').html(snippet);
@@ -144,7 +153,6 @@ function getPosition(letter) {
 // Check if the player has won
 function checkWon() {
     if (completed === word.length) {
-        console.log("Winner!");
         alert('You win!');
         
         return true;
@@ -162,7 +170,6 @@ function checkWon() {
 // Check if the player has lost
 function checkLost() {
     if (strikes >= 3) {
-        console.log('Loser!');
         alert('You lost!');
         
         return true;
