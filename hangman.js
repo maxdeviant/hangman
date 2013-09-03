@@ -13,6 +13,17 @@ $(document).ready(function() {
         $('#letterbank').css('display', 'inline');
     });
     
+    $('#newGame').click(function() {
+        init();
+        
+        $('#newGame').css('display', 'none');
+        
+        // Show the other elements
+        $('#word').css('display', 'inline');
+        $('#guessed').css('display', 'inline');
+        $('#letterbank').css('display', 'inline');
+    });
+    
     $('#letterbank button').click(function() {
         var guess = $(this).attr('value');
 
@@ -88,7 +99,10 @@ function guessLetter(guess) {
         }
     }
     
-    checkWon();
+    if (checkWon()) {
+        // New Game
+        init();
+    }
 };
 
 // Find all occurrences of a given letter in the word
@@ -108,5 +122,16 @@ function getPosition(letter) {
 function checkWon() {
     if (completed === word.length) {
         console.log("Winner!");
+        alert('You win!');
+        
+        return true;
+        /*$('#newGame').html('<button type="button" class="btn btn-lg btn-primary">New Game</button>').css('display', 'inline');
+        
+        // Hide the other elements
+        $('#word').css('display', 'none');
+        $('#guessed').css('display', 'none');
+        $('#letterbank').css('display', 'none');*/
     }
+    
+    return false;
 };
